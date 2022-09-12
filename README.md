@@ -13,9 +13,11 @@ class custom_indexed:
         match index:    
             case int(s):      
                 print('this is "me[0]"-like expression')        
-            case Slice(int(s)):      
+            case Slice(int(s)):
+                # note, this also matches "me[0:<Any>:<Any>]"-like
                 print('this is "me[0:]"-like expression')        
             case Slice(int(start), int(stop)):      
+                # note, this also matches "me[0:5:<Any>]"-like
                 print('this is "me[0:5]"-like expression')        
             case Slice(int(start), int(stop), int(stride)):      
                 print('this is "me[0:5:2]"-like expression')        
