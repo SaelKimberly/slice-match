@@ -1,6 +1,15 @@
 # slice-match
 Simple class, that simplify usage of slices in `__getitem__`.
 
+**Available on PyPi**: https://pypi.org/project/slice-match/
+
+# Installation
+Install with pip:
+
+```powershell
+pip install -U slice-match
+```
+
 # Requirements
 Python 3.10 and newer
 
