@@ -1,2 +1,2 @@
 # slice-match
-Simple class, that simplify usage of slices in __getitem__.
+Simple class, that simplify usage of slices in `__getitem__`.
