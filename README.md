@@ -1,19 +1,23 @@
 # slice-match
+
 Simple class, that simplify usage of slices in `__getitem__`.
 
-**Available on PyPi**: https://pypi.org/project/slice-match/
+**Available on PyPi**: <https://pypi.org/project/slice-match/>
 
-# Installation
+## Installation
+
 Install with pip:
 
 ```powershell
 pip install -U slice-match
 ```
 
-# Requirements
+## Requirements
+
 Python 3.10 and newer
 
-# Description
+## Description
+
 It's just a little trick, that allows you to do:
 
 ```python
@@ -32,53 +36,14 @@ class custom_indexed:
                 print('this is "me[0:5:2]"-like expression')        
             case Slice(start, None, stride):      
                 print('this is "me[<Any>::<Any>]"-like expression')
+            case Slice(start=12):
+                print('this is "me[12:<Any>:<Any>]"-like expression')
 ```
 
-# Performance drop
+## Performance drop
 
-For testing purpose, special class created:
+Using `Slice` cause ~2x performance drop, compared with using `slice`.
 
-```python
-class gg:
-    def __class_getitem__(cls, index):
-        return index
-```
+Simple benchmark notebook can be found here: <https://github.com/SaelKimberly/slice-match/blob/main/slice-match.ipynb>
 
-Tested constructions:
-
-```python
-%%timeit
-match gg[:12]:
-    case slice() as x if x.start is None and isinstance((y := x.stop), int) and x.step is None:
-        i = y
-    case _:
-        i = -1
-```
-Result:
-`740 ns ± 83 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)`
-
-```python
-%%timeit
-match gg[:12]:
-    case slice() as x:
-        match x.start, x.stop, x.step:
-            case None, int(y), None:
-                i = y
-    case _:
-        i = -1
-```
-Result:
-`2.02 µs ± 251 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)`
-
-```python
-%%timeit
-match gg[:14]:
-    case Slice(None, int(y), None):
-        i = y
-    case _:
-        i = -1
-```
-Result:
-`3.33 µs ± 436 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)`
-
-So, readability improved (over 9000% ;) ), but performance slightly drops (+2.5 µs for each Slice in match-case)
+So, readability improved (over 9000% ;) ), but performance slightly drops.
