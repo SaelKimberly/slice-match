@@ -12,8 +12,7 @@ class Slice(metaclass=ABCMeta):
     __slots__ = ('start', 'stop', 'step')
     __match_args__ = ('start', 'stop', 'step')
 
-    def __init__(self, start, stop=None, step=None) -> None:
-        """just pass here - match case instruction does not call this function anyway"""
-        pass
+    __init__ = slice.__init__  # type: ignore
 
     __subclasscheck__ = slice.__subclasscheck__
+    __getattribute__ = slice.__getattribute__  # type: ignore
