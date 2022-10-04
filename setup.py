@@ -5,7 +5,7 @@ README = Path('README.md').read_text()
 
 setup_args = dict(
     name='slice-match',
-    version='0.1.1',
+    version='0.2.0',
     description='Simple class, that simplify usage of slices in __getitem__',
     long_description_content_type="text/markdown",
     long_description=README,
@@ -15,7 +15,9 @@ setup_args = dict(
     author_email='sael.kimberly@yandex.ru',
     keywords=['Slice', 'Match', 'SliceMatch'],
     url='https://github.com/SaelKimberly/slice-match',
-    download_url='https://pypi.org/project/slice-match/'
+    download_url='https://pypi.org/project/slice-match/',
+    classifiers=['Programming Language :: Python :: 3.10'],
+    python_requires=">=3.10",
 )
 
 
