@@ -13,8 +13,7 @@ class Slice(metaclass=ABCMeta):
     __match_args__ = ('start', 'stop', 'step')
 
     def __init__(self, start, stop=None, step=None) -> None:
-        self.start, self.stop, self.step = start, stop, step
+        """just pass here - match case instruction does not call this function anyway"""
+        pass
 
-    @classmethod
-    def __subclasscheck__(cls, __subclass: type) -> bool:
-        return slice.__subclasscheck__(__subclass)
+    __subclasscheck__ = slice.__subclasscheck__
